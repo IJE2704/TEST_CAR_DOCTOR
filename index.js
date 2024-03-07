@@ -23,33 +23,33 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-const logger = async(req,res,next) =>{
-  console.log("caller :" , req.host, req.orginalUrl)
-  next();
-}
+// const logger = async(req,res,next) =>{
+//   console.log("caller :" , req.host, req.orginalUrl)
+//   next();
+// }
 
-const verifyToken = async(req,res,next) =>{
-  console.log("here is verify")
-  const token = req.cookies.token;
-  console.log(token)
-  // console.log(req)
-  if(!token)
-  {
-    console.log("not token")
-    return res.status(401).send({message: "Un Auhtorized"})
-  }
-  jwt.verify(token, process.env.accsess_token, (err,decoded)=>{
-    console.log("ender verify")
-    if(err){
-      console.log("error")
-      return res.status(401).send({message: "Un Auhtorized"})
-    }
-    console.log("value in the token : " ,decoded)
-    req.user = decoded;
-    next();
-  })
-  console.log(token)
-}
+// const verifyToken = async(req,res,next) =>{
+//   console.log("here is verify")
+//   const token = req.cookies.token;
+//   console.log(token)
+//   // console.log(req)
+//   if(!token)
+//   {
+//     console.log("not token")
+//     return res.status(401).send({message: "Un Auhtorized"})
+//   }
+//   jwt.verify(token, process.env.accsess_token, (err,decoded)=>{
+//     console.log("ender verify")
+//     if(err){
+//       console.log("error")
+//       return res.status(401).send({message: "Un Auhtorized"})
+//     }
+//     console.log("value in the token : " ,decoded)
+//     req.user = decoded;
+//     next();
+//   })
+//   console.log(token)
+// }
 // console.log(process.env.db_user);
 
 const uri = `mongodb+srv://${process.env.db_user}:${process.env.db_user_pass}@cluster0.oenz0rl.mongodb.net/?retryWrites=true&w=majority`;
